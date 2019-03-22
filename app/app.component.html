@@ -1,0 +1,40 @@
+<button (click)=toggle()>Toggle</button>
+<input id="toto" type="checkbox" [(ngModel)]="checkboxable" checked/>
+<ngx-datatable
+      [rows]="rows"
+      [rowHeight]="'auto'"
+      [columnMode]="'force'"
+      [externalPaging]="true"
+      [externalSorting]="true"
+      [count]="totalElements"
+      [offset]="pageNumber"
+      [loadingIndicator]="loading"
+      [selected]="selectedRawEventsItemCheckbox"
+      [selectionType]="'checkbox'"
+      (select)='onSelect($event)'
+      [rowClass]="getRowClass"
+      [displayCheck]="checkboxable"
+      [limit]="size"
+      (page)='setPage($event)'>
+
+      <ngx-datatable-column
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
+        >
+      </ngx-datatable-column>
+
+      <ngx-datatable-column [sortable]="false" [resizeable]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          NAME
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div>{{row?.name}}</div>
+        </ng-template>
+      </ngx-datatable-column>
+</ngx-datatable>
+<pre>{{ selected | json }}</pre>
